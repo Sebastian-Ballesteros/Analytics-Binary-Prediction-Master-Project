@@ -1,0 +1,87 @@
+---
+title: "SVM"
+author: "Ballesteros"
+date: "2023-03-20"
+output: html_document
+---
+
+The code block is an R Markdown document that trains and evaluates support vector machine (SVM) models on the tele_train and tele_test datasets using different kernels. The kernlab and caret libraries are loaded in the setup block.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(kernlab)
+library(caret)
+```
+
+
+In the next block, the tele_train and tele_test datasets are loaded using the readRDS() function.
+```{r}
+tele_train <- readRDS("tele_train")
+tele_test <- readRDS("tele_test")
+```
+
+
+### Build a Model
+
+The next code block trains an SVM model for each of the eight different kernels specified in the kernels vector. The ksvm() function from kernlab library is used to train the model with as.factor(yyes) ~ . as the formula, which means the model is trained to predict the yyes column in the tele_train dataset based on all other columns. The trained models are stored in the svms list object and saved to a file using saveRDS().
+
+```{r eval = FALSE}
+kernels <- c("rbfdot", "polydot", "tanhdot", "vanilladot", "laplacedot", "besseldot", "anovadot", "splinedot")
+svms <- c()
+
+for (i in kernels){
+  svm_model <- ksvm(as.factor(yyes) ~ ., data = tele_train, kernel = i)
+  svms <- append(svms,svm_model)
+}
+
+names(svms) <- kernels
+
+saveRDS(svms,"svms")
+```
+
+The remaining code blocks evaluate the performance of the trained models using confusionMatrix() function from caret library. Each block loads a specific SVM model from the svms list object and passes the tele_test dataset to the predict() function to make predictions.
+
+### rbfdot
+```{r}
+svms <- readRDS("svms")
+
+rbf_pred <- predict(svms$rbfdot,tele_test)
+confusionMatrix(as.factor(rbf_pred), as.factor(tele_test$yyes))
+```
+### polydot
+```{r}
+confusionMatrix(as.factor(predict(svms$polydot,tele_test)), as.factor(tele_test$yyes))
+```
+
+### tanhdot
+```{r}
+confusionMatrix(as.factor(predict(svms$tanhdot,tele_test)), as.factor(tele_test$yyes))
+```
+
+### vanilladot
+```{r}
+confusionMatrix(as.factor(predict(svms$vanilladot,tele_test)), as.factor(tele_test$yyes))
+```
+
+### laplacedot
+```{r}
+confusionMatrix(as.factor(predict(svms$laplacedot,tele_test)), as.factor(tele_test$yyes))
+```
+
+### besseldot
+```{r}
+confusionMatrix(as.factor(predict(svms$besseldot,tele_test)), as.factor(tele_test$yyes))
+```
+
+### anovadot
+```{r}
+confusionMatrix(as.factor(predict(svms$anovadot,tele_test)), as.factor(tele_test$yyes))
+```
+
+### splinedot
+```{r}
+confusionMatrix(as.factor(predict(svms$splinedot,tele_test)), as.factor(tele_test$yyes))
+```
+
+

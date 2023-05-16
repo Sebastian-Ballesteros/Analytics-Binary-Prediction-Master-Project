@@ -1,0 +1,117 @@
+---
+title: "KNN"
+author: "Ballesteros"
+date: "2023-03-20"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Reading Libraries
+This block loads the necessary libraries for the KNN analysis and reads the "tele_norm" dataset.
+```{r}
+library(class)
+library(gmodels)
+library(caret)
+```
+
+### Cleaning Data
+
+This block creates the training and test sets for classification using the KNN algorithm. It selects a random subset of rows as the test set and uses the remaining rows as the training set.
+```{r}
+tele_norm <-readRDS("tele_norm")
+
+# Selects 10000 random rows for test data
+set.seed(12345)
+test_set <- sample(1:nrow(tele_norm), nrow(tele_norm)/2) 
+# Depending on R-version and computer, different rows may be selected. 
+# If that happens, results are different. 
+
+# Create a train set and test set
+#First the predictors - all columns except the yyes column
+tele_train <- tele_norm[-test_set, -match("yyes",names(tele_norm))]
+tele_test  <- tele_norm[test_set, -match("yyes",names(tele_norm))]
+
+#Now the response (aka Labels) - only the yyes column
+tele_train_labels <- tele_norm[-test_set, "yyes"]
+tele_test_labels  <- tele_norm[test_set, "yyes"]
+
+```
+
+### Finding optimal K
+This block uses a loop to calculate the Kappa statistic for a range of K values and saves the results in a data frame. The data frame is then saved to a file and a plot of Kappa values against K values is produced.
+```{r eval = FALSE}
+knn_df<- data.frame()
+  
+for (i in seq(3,145,2)){
+ knn_pred <- knn(tele_train, tele_test, cl = tele_train_labels , k = i)
+ CM <- confusionMatrix(as.factor(knn_pred),as.factor(tele_test_labels))
+ knn_df<-rbind(knn_df,c(i,CM$overall[2]))
+}
+
+names(knn_df) <- c("k","Kappa")
+saveRDS(knn_df,"optimal_k")
+```
+
+### Ploting error 
+This block performs KNN regression on the same dataset to identify the optimal value of K for regression. The RMSE, R-squared, and MAE statistics are saved for each value of K in a data frame, which is then saved to a file.
+```{r}
+knn_df<-readRDS("optimal_k")
+
+plot(knn_df$k, knn_df$Kappa, type = "l")
+
+```
+
+### Saving KNN prediction
+```{r eval = FALSE}
+knn_pred <- knn(tele_train, tele_test, cl = tele_train_labels , k = knn_df$k[which.max(knn_df$Kappa)])
+
+saveRDS(knn_pred,"knn_pred")
+```
+
+This block produces three plots of the RMSE, R-squared, and MAE statistics against K values.
+```{r eval = FALSE}
+tele_train$yyes <- tele_train_labels
+
+response_df<- data.frame("RMSE", "Rsquared", "MAE", "k")
+for (i in 1:30){
+  knn_reg_pred <- 
+  knnreg(yyes~., data = tele_train, k = i)
+
+  pred1 <- predict(knn_reg_pred, tele_test)
+
+  response_df[i,] <-c(postResample(pred1,tele_test_labels),i)
+}
+
+saveRDS(response_df,"optimal_k_reg")
+```
+
+```{r}
+response_df<-readRDS("optimal_k_reg")
+plot(response_df$X.k.,response_df$X.RMSE., type = "l")
+```
+```{r}
+plot(response_df$X.k.,response_df$X.Rsquared., type = "l")
+```
+```{r}
+plot(response_df$X.k.,response_df$X.MAE., type = "l")
+```
+
+This block performs KNN regression with the optimal K value and saves the predicted values for the test data. It then produces a confusion matrix by comparing the predicted values to the actual test data.
+```{r eval=FALSE}
+knn_reg <- knnreg(tele_train_labels~., data = tele_train, k = 15 )
+
+knn_reg_pred <- predict(knn_reg,tele_test)
+
+saveRDS(knn_reg_pred, "knn_reg_pred")
+```
+
+```{r}
+knn_reg_pred <- readRDS("knn_reg_pred")
+confusionMatrix(as.factor(ifelse(knn_reg_pred>0.16,1,0)),as.factor(tele_test_labels))
+```
+
+

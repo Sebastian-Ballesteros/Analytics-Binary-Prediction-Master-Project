@@ -1,0 +1,1026 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Model Ensamble},
+  pdfauthor={Ballesteros},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Model Ensamble}
+\author{Ballesteros}
+\date{2023-03-22}
+
+\begin{document}
+\maketitle
+
+Loading necessary packages: This block loads several R packages that are
+necessary for the analysis, such as class, caret, ggplot2, gmodels,
+neuralnet, glmnet, stringr, C50, and randomForest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(class)}
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(gmodels)}
+\FunctionTok{library}\NormalTok{(neuralnet)}
+\FunctionTok{library}\NormalTok{(glmnet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{verbatim}
+## Loaded glmnet 4.1-6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(C50)}
+\FunctionTok{library}\NormalTok{(randomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## randomForest 4.7-1.1
+\end{verbatim}
+
+\begin{verbatim}
+## Type rfNews() to see new features/changes/bug fixes.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'randomForest'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     margin
+\end{verbatim}
+
+\hypertarget{reading-test-data-and-renaming-to-normal-data}{%
+\subsubsection{Reading test data and renaming to normal
+data}\label{reading-test-data-and-renaming-to-normal-data}}
+
+Reading in test data: This block reads in the test dataset from a file
+called ``tele\_test'' and stores it in a variable called tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tele\_norm}\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"tele\_test"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{knn-model}{%
+\subsubsection{KNN Model}\label{knn-model}}
+
+This block reads in the predictions from a k-nearest neighbors (KNN)
+model and stores them in a variable called knn\_pred. Then it prints out
+the confusion matrix of the KNN model's predictions against the true
+labels in tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn\_pred }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"knn\_pred"}\NormalTok{)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(knn\_pred),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 17598  1736
+##          1   668   592
+##                                           
+##                Accuracy : 0.8833          
+##                  95% CI : (0.8788, 0.8876)
+##     No Information Rate : 0.887           
+##     P-Value [Acc > NIR] : 0.9534          
+##                                           
+##                   Kappa : 0.2722          
+##                                           
+##  Mcnemar's Test P-Value : <2e-16          
+##                                           
+##             Sensitivity : 0.9634          
+##             Specificity : 0.2543          
+##          Pos Pred Value : 0.9102          
+##          Neg Pred Value : 0.4698          
+##              Prevalence : 0.8870          
+##          Detection Rate : 0.8545          
+##    Detection Prevalence : 0.9388          
+##       Balanced Accuracy : 0.6089          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{knn_reg}{%
+\subsubsection{KNN\_reg}\label{knn_reg}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn\_reg\_pred }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"knn\_reg\_pred"}\NormalTok{)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(knn\_reg\_pred}\SpecialCharTok{\textgreater{}}\FloatTok{0.17}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 15692  1038
+##          1  2574  1290
+##                                           
+##                Accuracy : 0.8246          
+##                  95% CI : (0.8193, 0.8298)
+##     No Information Rate : 0.887           
+##     P-Value [Acc > NIR] : 1               
+##                                           
+##                   Kappa : 0.3208          
+##                                           
+##  Mcnemar's Test P-Value : <2e-16          
+##                                           
+##             Sensitivity : 0.8591          
+##             Specificity : 0.5541          
+##          Pos Pred Value : 0.9380          
+##          Neg Pred Value : 0.3339          
+##              Prevalence : 0.8870          
+##          Detection Rate : 0.7620          
+##    Detection Prevalence : 0.8124          
+##       Balanced Accuracy : 0.7066          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{ann-model}{%
+\subsubsection{ANN Model}\label{ann-model}}
+
+This block reads in an artificial neural network (ANN) model and uses it
+to make predictions on tele\_norm, which are stored in a variable called
+ann\_pred. Then it prints out the confusion matrix of the ANN model's
+predictions against the true labels in tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ann\_model }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"ann\_model.RDS"}\NormalTok{)}
+
+\NormalTok{ann\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(ann\_model ,tele\_norm)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(ann\_pred}\SpecialCharTok{\textgreater{}}\FloatTok{0.25}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 17095  1191
+##          1  1171  1137
+##                                           
+##                Accuracy : 0.8853          
+##                  95% CI : (0.8809, 0.8896)
+##     No Information Rate : 0.887           
+##     P-Value [Acc > NIR] : 0.7765          
+##                                           
+##                   Kappa : 0.4259          
+##                                           
+##  Mcnemar's Test P-Value : 0.6958          
+##                                           
+##             Sensitivity : 0.9359          
+##             Specificity : 0.4884          
+##          Pos Pred Value : 0.9349          
+##          Neg Pred Value : 0.4926          
+##              Prevalence : 0.8870          
+##          Detection Rate : 0.8301          
+##    Detection Prevalence : 0.8879          
+##       Balanced Accuracy : 0.7121          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(ann\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{logit-model}{%
+\subsubsection{Logit model}\label{logit-model}}
+
+This block reads in a logistic regression model and uses it to make
+predictions on tele\_norm, which are stored in a variable called
+logit\_pred. Then it prints out the confusion matrix of the logistic
+regression model's predictions against the true labels in tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logit\_model}\OtherTok{\textless{}{-}}\FunctionTok{readRDS}\NormalTok{(}\StringTok{"logit\_model"}\NormalTok{)}
+
+\NormalTok{logit\_pred}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(logit\_model, tele\_norm , }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+## prediction from a rank-deficient fit may be misleading
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(logit\_pred}\SpecialCharTok{\textgreater{}}\NormalTok{.}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 18011  1806
+##          1   255   522
+##                                          
+##                Accuracy : 0.8999         
+##                  95% CI : (0.8957, 0.904)
+##     No Information Rate : 0.887          
+##     P-Value [Acc > NIR] : 1.225e-09      
+##                                          
+##                   Kappa : 0.2964         
+##                                          
+##  Mcnemar's Test P-Value : < 2.2e-16      
+##                                          
+##             Sensitivity : 0.9860         
+##             Specificity : 0.2242         
+##          Pos Pred Value : 0.9089         
+##          Neg Pred Value : 0.6718         
+##              Prevalence : 0.8870         
+##          Detection Rate : 0.8746         
+##    Detection Prevalence : 0.9623         
+##       Balanced Accuracy : 0.6051         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{decision-tree}{%
+\subsubsection{Decision Tree}\label{decision-tree}}
+
+This block reads in a decision tree model and uses it to make
+predictions on tele\_norm, which are stored in a variable called
+DT\_pred. Then it prints out the confusion matrix of the decision tree
+model's predictions against the true labels in tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_model }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"DT\_model"}\NormalTok{)}
+
+\NormalTok{DT\_pred }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{predict}\NormalTok{(DT\_model, tele\_norm))}\SpecialCharTok{{-}}\DecValTok{1}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(DT\_pred),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 17652  1555
+##          1   614   773
+##                                           
+##                Accuracy : 0.8947          
+##                  95% CI : (0.8904, 0.8988)
+##     No Information Rate : 0.887           
+##     P-Value [Acc > NIR] : 0.0002151       
+##                                           
+##                   Kappa : 0.3623          
+##                                           
+##  Mcnemar's Test P-Value : < 2.2e-16       
+##                                           
+##             Sensitivity : 0.9664          
+##             Specificity : 0.3320          
+##          Pos Pred Value : 0.9190          
+##          Neg Pred Value : 0.5573          
+##              Prevalence : 0.8870          
+##          Detection Rate : 0.8571          
+##    Detection Prevalence : 0.9327          
+##       Balanced Accuracy : 0.6492          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{boosted-decision-tree}{%
+\subsubsection{Boosted Decision Tree}\label{boosted-decision-tree}}
+
+This block reads in a boosted decision tree model and uses it to make
+predictions on tele\_norm, which are stored in a variable called
+DT\_pred\_boost. Then it prints out the confusion matrix of the boosted
+decision tree model's predictions against the true labels in tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_model\_boost }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"DT\_model\_boost"}\NormalTok{)}
+
+\NormalTok{DT\_pred\_boost }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{predict}\NormalTok{(DT\_model\_boost, tele\_norm))}\SpecialCharTok{{-}}\DecValTok{1}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(DT\_pred\_boost),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 17954  1782
+##          1   312   546
+##                                           
+##                Accuracy : 0.8983          
+##                  95% CI : (0.8941, 0.9024)
+##     No Information Rate : 0.887           
+##     P-Value [Acc > NIR] : 9.235e-08       
+##                                           
+##                   Kappa : 0.3001          
+##                                           
+##  Mcnemar's Test P-Value : < 2.2e-16       
+##                                           
+##             Sensitivity : 0.9829          
+##             Specificity : 0.2345          
+##          Pos Pred Value : 0.9097          
+##          Neg Pred Value : 0.6364          
+##              Prevalence : 0.8870          
+##          Detection Rate : 0.8718          
+##    Detection Prevalence : 0.9583          
+##       Balanced Accuracy : 0.6087          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{support-vector-machines}{%
+\subsubsection{Support Vector Machines}\label{support-vector-machines}}
+
+This block reads in several support vector machine (SVM) models and uses
+them to make predictions on tele\_norm. The predictions are stored in a
+data frame called SVM\_df, which is then saved to a file called
+``svm\_pred''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SVMs }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"svms"}\NormalTok{)}
+
+\NormalTok{SVM\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{rbfdot =} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{rbfdot,tele\_test))}
+
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{polydot    }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{polydot,tele\_norm)}
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{tanhdot    }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{tanhdot,tele\_norm)}
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{vanilladot }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{vanilladot,tele\_norm)}
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{laplacedot }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{laplacedot,tele\_norm)}
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{besseldot  }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{besseldot,tele\_norm)}
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{anovadot   }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{anovadot,tele\_norm)}
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{splinedot  }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(SVMs}\SpecialCharTok{$}\NormalTok{splinedot,tele\_norm)}
+
+\FunctionTok{saveRDS}\NormalTok{(SVM\_df, }\StringTok{"svm\_pred"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This block reads in the svm\_pred variable and checks if there is any
+perfect multicollinearity between the regressors and then drops polydot
+as it seems to have a perfect multicollinearity problem with vanilladot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SVM\_df}\OtherTok{\textless{}{-}}\FunctionTok{readRDS}\NormalTok{(}\StringTok{"svm\_pred"}\NormalTok{)}
+
+\NormalTok{SVM\_df}\OtherTok{\textless{}{-}}\FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(SVM\_df,as.numeric))}
+
+\FunctionTok{cor}\NormalTok{(SVM\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 rbfdot     polydot     tanhdot  vanilladot  laplacedot
+## rbfdot      1.00000000  0.82711870  0.24690558  0.82711870  0.82787228
+## polydot     0.82711870  1.00000000  0.23826056  1.00000000  0.96508839
+## tanhdot     0.24690558  0.23826056  1.00000000  0.23826056  0.22954255
+## vanilladot  0.82711870  1.00000000  0.23826056  1.00000000  0.96508839
+## laplacedot  0.82787228  0.96508839  0.22954255  0.96508839  1.00000000
+## besseldot  -0.06177379 -0.06627843 -0.11579280 -0.06627843 -0.06396455
+## anovadot    0.84371166  0.97430677  0.23481388  0.97430677  0.94029215
+## splinedot   0.11628260  0.14964621  0.05813695  0.14964621  0.14566905
+##              besseldot    anovadot   splinedot
+## rbfdot     -0.06177379  0.84371166  0.11628260
+## polydot    -0.06627843  0.97430677  0.14964621
+## tanhdot    -0.11579280  0.23481388  0.05813695
+## vanilladot -0.06627843  0.97430677  0.14964621
+## laplacedot -0.06396455  0.94029215  0.14566905
+## besseldot   1.00000000 -0.06802625 -0.04826574
+## anovadot   -0.06802625  1.00000000  0.14910675
+## splinedot  -0.04826574  0.14910675  1.00000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SVM\_df}\SpecialCharTok{$}\NormalTok{polydot }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{random-forest}{%
+\subsubsection{Random Forest}\label{random-forest}}
+
+his block reads in a random forest model and uses it to make predictions
+on tele\_norm, which are stored in a variable called RF\_pred. Then it
+prints out the confusion matrix of the random forest model's predictions
+against the true labels in tele\_norm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RF\_model }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"RF\_model"}\NormalTok{)}
+
+\NormalTok{RF\_pred }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{predict}\NormalTok{(RF\_model, tele\_norm))}\SpecialCharTok{{-}}\DecValTok{1}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(RF\_pred),}\FunctionTok{as.factor}\NormalTok{(tele\_norm}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 16441  1010
+##          1  1825  1318
+##                                          
+##                Accuracy : 0.8623         
+##                  95% CI : (0.8576, 0.867)
+##     No Information Rate : 0.887          
+##     P-Value [Acc > NIR] : 1              
+##                                          
+##                   Kappa : 0.4045         
+##                                          
+##  Mcnemar's Test P-Value : <2e-16         
+##                                          
+##             Sensitivity : 0.9001         
+##             Specificity : 0.5662         
+##          Pos Pred Value : 0.9421         
+##          Neg Pred Value : 0.4193         
+##              Prevalence : 0.8870         
+##          Detection Rate : 0.7983         
+##    Detection Prevalence : 0.8474         
+##       Balanced Accuracy : 0.7331         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{combined-data-frame}{%
+\subsubsection{Combined Data Frame}\label{combined-data-frame}}
+
+Combining all predictions from all prior models into a single data frame
+for later use in the level two model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(knn\_pred,}
+\NormalTok{                   knn\_reg\_pred,}
+\NormalTok{                   ann\_pred,}
+\NormalTok{                   logit\_pred,}
+\NormalTok{                   DT\_pred,}
+\NormalTok{                   DT\_pred\_boost,}
+\NormalTok{                   RF\_pred,}
+                   \AttributeTok{yyes=}\NormalTok{ tele\_norm}\SpecialCharTok{$}\NormalTok{yyes)}
+
+\NormalTok{df\_2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(df\_2,SVM\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{test-and-train}{%
+\subsubsection{Test and Train}\label{test-and-train}}
+
+Spliting data into test and train data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{12345}\NormalTok{)}
+\NormalTok{test\_set }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(df\_2), }\FunctionTok{nrow}\NormalTok{(df\_2)}\SpecialCharTok{*}\FloatTok{0.3}\NormalTok{) }
+
+\NormalTok{df\_2\_train }\OtherTok{\textless{}{-}}\NormalTok{ df\_2[}\SpecialCharTok{{-}}\NormalTok{test\_set,]}
+\NormalTok{df\_2\_test  }\OtherTok{\textless{}{-}}\NormalTok{ df\_2[test\_set,]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{upsample-train-data}{%
+\subsubsection{UpSample Train Data}\label{upsample-train-data}}
+
+Upsampling train data for use in some random forest and decision tree
+models
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_2\_up\_train }\OtherTok{\textless{}{-}} \FunctionTok{upSample}\NormalTok{(df\_2\_train[, }\SpecialCharTok{!}\FunctionTok{names}\NormalTok{(df\_2\_train) }\SpecialCharTok{\%in\%} \StringTok{"yyes"}\NormalTok{],}\FunctionTok{as.factor}\NormalTok{(df\_2\_train}\SpecialCharTok{$}\NormalTok{yyes), }\AttributeTok{yname =} \StringTok{"yyes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{final-decision-tree}{%
+\subsubsection{Final Decision Tree}\label{final-decision-tree}}
+
+This is the final decision tree model utilizing the df\_2 dataset
+created above to improve prediction
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_model\_2 }\OtherTok{\textless{}{-}} \FunctionTok{C5.0}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(yyes) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ df\_2\_train)}
+
+\FunctionTok{plot}\NormalTok{(DT\_model\_2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{tele_combined_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_pred\_2 }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{predict}\NormalTok{(DT\_model\_2, df\_2\_test))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confusionMatrix}\NormalTok{(DT\_pred\_2,}\FunctionTok{as.factor}\NormalTok{(df\_2\_test}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 5390  424
+##          1  132  232
+##                                          
+##                Accuracy : 0.91           
+##                  95% CI : (0.9026, 0.917)
+##     No Information Rate : 0.8938         
+##     P-Value [Acc > NIR] : 1.325e-05      
+##                                          
+##                   Kappa : 0.4102         
+##                                          
+##  Mcnemar's Test P-Value : < 2.2e-16      
+##                                          
+##             Sensitivity : 0.9761         
+##             Specificity : 0.3537         
+##          Pos Pred Value : 0.9271         
+##          Neg Pred Value : 0.6374         
+##              Prevalence : 0.8938         
+##          Detection Rate : 0.8725         
+##    Detection Prevalence : 0.9411         
+##       Balanced Accuracy : 0.6649         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{cost-matrix-dt}{%
+\subsubsection{Cost Matrix DT}\label{cost-matrix-dt}}
+
+Implementing a cost matrix reduce the rates of falce positives which for
+this case are the most important when it comes to maximizing profits for
+the firm running the call center
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{error\_cost }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{20}\NormalTok{,}\DecValTok{0}\NormalTok{),}\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\NormalTok{error\_cost}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    0  -20
+## [2,]    0    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_2\_errorcost }\OtherTok{\textless{}{-}} \FunctionTok{C5.0}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(yyes) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ df\_2\_train, }\AttributeTok{costs =}\NormalTok{ error\_cost)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: no dimnames were given for the cost matrix; the factor levels will be
+## used
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{errorcost\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(DT\_2\_errorcost, df\_2\_test)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(errorcost\_pred), }\FunctionTok{as.factor}\NormalTok{(df\_2\_test}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 5390  424
+##          1  132  232
+##                                          
+##                Accuracy : 0.91           
+##                  95% CI : (0.9026, 0.917)
+##     No Information Rate : 0.8938         
+##     P-Value [Acc > NIR] : 1.325e-05      
+##                                          
+##                   Kappa : 0.4102         
+##                                          
+##  Mcnemar's Test P-Value : < 2.2e-16      
+##                                          
+##             Sensitivity : 0.9761         
+##             Specificity : 0.3537         
+##          Pos Pred Value : 0.9271         
+##          Neg Pred Value : 0.6374         
+##              Prevalence : 0.8938         
+##          Detection Rate : 0.8725         
+##    Detection Prevalence : 0.9411         
+##       Balanced Accuracy : 0.6649         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{boosting}{%
+\subsubsection{Boosting}\label{boosting}}
+
+Implementing 10 boosting trials to try and see if prediction error goes
+down
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_2\_boosted }\OtherTok{\textless{}{-}} \FunctionTok{C5.0}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(yyes) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ df\_2\_train, }\AttributeTok{trials =} \DecValTok{10}\NormalTok{)}
+
+\CommentTok{\#plot(DT\_2\_boosted)}
+
+\NormalTok{boosted\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(DT\_2\_boosted,df\_2\_test)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(boosted\_pred), }\FunctionTok{as.factor}\NormalTok{(df\_2\_test}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 5388  440
+##          1  134  216
+##                                           
+##                Accuracy : 0.9071          
+##                  95% CI : (0.8996, 0.9142)
+##     No Information Rate : 0.8938          
+##     P-Value [Acc > NIR] : 0.0003072       
+##                                           
+##                   Kappa : 0.3839          
+##                                           
+##  Mcnemar's Test P-Value : < 2.2e-16       
+##                                           
+##             Sensitivity : 0.9757          
+##             Specificity : 0.3293          
+##          Pos Pred Value : 0.9245          
+##          Neg Pred Value : 0.6171          
+##              Prevalence : 0.8938          
+##          Detection Rate : 0.8721          
+##    Detection Prevalence : 0.9433          
+##       Balanced Accuracy : 0.6525          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{combining-boosting-and-error-cost-matrix}{%
+\subsubsection{Combining boosting and error cost
+matrix}\label{combining-boosting-and-error-cost-matrix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT\_2\_boosted\_error }\OtherTok{\textless{}{-}} \FunctionTok{C5.0}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(yyes) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ df\_2\_train, }\AttributeTok{trials =} \DecValTok{20}\NormalTok{, }\AttributeTok{costs =}\NormalTok{ error\_cost)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: no dimnames were given for the cost matrix; the factor levels will be
+## used
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot(DT\_2\_boosted)}
+
+\NormalTok{boosted\_error\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(DT\_2\_boosted\_error,df\_2\_test)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(boosted\_error\_pred), }\FunctionTok{as.factor}\NormalTok{(df\_2\_test}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 5400  472
+##          1  122  184
+##                                           
+##                Accuracy : 0.9039          
+##                  95% CI : (0.8962, 0.9111)
+##     No Information Rate : 0.8938          
+##     P-Value [Acc > NIR] : 0.005074        
+##                                           
+##                   Kappa : 0.3378          
+##                                           
+##  Mcnemar's Test P-Value : < 2.2e-16       
+##                                           
+##             Sensitivity : 0.9779          
+##             Specificity : 0.2805          
+##          Pos Pred Value : 0.9196          
+##          Neg Pred Value : 0.6013          
+##              Prevalence : 0.8938          
+##          Detection Rate : 0.8741          
+##    Detection Prevalence : 0.9505          
+##       Balanced Accuracy : 0.6292          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{combined-logit}{%
+\subsubsection{Combined Logit}\label{combined-logit}}
+
+Running a logit regression to see if prediction improves
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logit\_comb}\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(yyes}\SpecialCharTok{\textasciitilde{}}\NormalTok{., df\_2\_train, }\AttributeTok{family =} \StringTok{"binomial"}\NormalTok{)}
+
+\NormalTok{logit\_comb\_pred}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(logit\_comb, df\_2\_test , }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\NormalTok{pred}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(logit\_comb\_pred}\SpecialCharTok{\textgreater{}=}\NormalTok{.}\DecValTok{16}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+
+\FunctionTok{confusionMatrix}\NormalTok{(pred,}\FunctionTok{as.factor}\NormalTok{(df\_2\_test}\SpecialCharTok{$}\NormalTok{yyes), }\AttributeTok{positive =} \StringTok{"1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 4948  279
+##          1  574  377
+##                                           
+##                Accuracy : 0.8619          
+##                  95% CI : (0.8531, 0.8704)
+##     No Information Rate : 0.8938          
+##     P-Value [Acc > NIR] : 1               
+##                                           
+##                   Kappa : 0.3929          
+##                                           
+##  Mcnemar's Test P-Value : <2e-16          
+##                                           
+##             Sensitivity : 0.57470         
+##             Specificity : 0.89605         
+##          Pos Pred Value : 0.39642         
+##          Neg Pred Value : 0.94662         
+##              Prevalence : 0.10618         
+##          Detection Rate : 0.06102         
+##    Detection Prevalence : 0.15393         
+##       Balanced Accuracy : 0.73537         
+##                                           
+##        'Positive' Class : 1               
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(logit\_comb)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = yyes ~ ., family = "binomial", data = df_2_train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0965  -0.3547  -0.3420  -0.3326   2.6628  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)   -1.88440    0.27593  -6.829 8.54e-12 ***
+## knn_pred1      0.05893    0.10813   0.545 0.585776    
+## knn_reg_pred   0.42516    0.33652   1.263 0.206448    
+## ann_pred       2.78734    0.27302  10.209  < 2e-16 ***
+## logit_pred     1.90443    0.43786   4.349 1.36e-05 ***
+## DT_pred        0.19593    0.12631   1.551 0.120864    
+## DT_pred_boost -0.05024    0.17040  -0.295 0.768114    
+## RF_pred        0.78862    0.11137   7.081 1.43e-12 ***
+## rbfdot        -0.81343    0.22917  -3.550 0.000386 ***
+## tanhdot       -0.04940    0.09460  -0.522 0.601499    
+## vanilladot    -2.64190    0.71387  -3.701 0.000215 ***
+## laplacedot    -0.03496    0.40987  -0.085 0.932023    
+## besseldot     -0.63572    0.15593  -4.077 4.56e-05 ***
+## anovadot       3.05201    0.60842   5.016 5.27e-07 ***
+## splinedot     -0.03645    0.07477  -0.487 0.625908    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 10346.2  on 14415  degrees of freedom
+## Residual deviance:  7940.3  on 14401  degrees of freedom
+## AIC: 7970.3
+## 
+## Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+\hypertarget{combined-random-forest}{%
+\subsubsection{Combined Random Forest}\label{combined-random-forest}}
+
+Combined
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RF\_model\_2 }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(yyes)}\SpecialCharTok{\textasciitilde{}}\NormalTok{.,}\AttributeTok{data =}\NormalTok{ df\_2\_up\_train)}
+
+\NormalTok{RF\_pred\_2 }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{predict}\NormalTok{(RF\_model\_2, df\_2\_test))}\SpecialCharTok{{-}}\DecValTok{1}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(RF\_pred\_2), }\FunctionTok{as.factor}\NormalTok{(df\_2\_test}\SpecialCharTok{$}\NormalTok{yyes))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 4827  262
+##          1  695  394
+##                                          
+##                Accuracy : 0.8451         
+##                  95% CI : (0.8358, 0.854)
+##     No Information Rate : 0.8938         
+##     P-Value [Acc > NIR] : 1              
+##                                          
+##                   Kappa : 0.3678         
+##                                          
+##  Mcnemar's Test P-Value : <2e-16         
+##                                          
+##             Sensitivity : 0.8741         
+##             Specificity : 0.6006         
+##          Pos Pred Value : 0.9485         
+##          Neg Pred Value : 0.3618         
+##              Prevalence : 0.8938         
+##          Detection Rate : 0.7813         
+##    Detection Prevalence : 0.8237         
+##       Balanced Accuracy : 0.7374         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{conclusion}{%
+\subsubsection{Conclusion}\label{conclusion}}
+
+It seems that the best model over all was the ANN model with c(4,2)
+hidden layers. It managed to get a kappa of 0.425 which is remarkable
+given that the best combined model was only able to achieve a kappa of
+0.4102. It is hard for me to fully understand why this is the case but i
+suspect it has to do with the amount of data on which it was trained.
+Because the first model had the availability of 50\% of the data to
+train with, it is possible that due to the nature of ANN's which tend to
+continue to learn in a linear fashion as new data is implemented, that
+it performed better than the decision tree of all the outputs of the
+data. I also tried to make other models to appr
+
+\end{document}

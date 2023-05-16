@@ -1,0 +1,300 @@
+---
+title: "Model Ensamble"
+author: "Ballesteros"
+date: "2023-03-22"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Loading necessary packages: This block loads several R packages that are necessary for the analysis, such as class, caret, ggplot2, gmodels, neuralnet, glmnet, stringr, C50, and randomForest.
+
+
+```{r}
+library(class)
+library(caret)
+library(ggplot2)
+library(gmodels)
+library(neuralnet)
+library(glmnet)
+library(stringr)
+library(C50)
+library(randomForest)
+```
+
+### Reading test data and renaming to normal data
+
+Reading in test data: This block reads in the test dataset from a file called "tele_test" and stores it in a variable called tele_norm.
+
+```{r}
+tele_norm<- readRDS("tele_test")
+```
+
+### KNN Model
+
+This block reads in the predictions from a k-nearest neighbors (KNN) model and stores them in a variable called knn_pred. Then it prints out the confusion matrix of the KNN model's predictions against the true labels in tele_norm.
+
+```{r}
+knn_pred <- readRDS("knn_pred")
+
+confusionMatrix(as.factor(knn_pred),as.factor(tele_norm$yyes))
+
+```
+### KNN_reg
+
+```{r}
+knn_reg_pred <- readRDS("knn_reg_pred")
+
+confusionMatrix(as.factor(ifelse(knn_reg_pred>0.17,1,0)),as.factor(tele_norm$yyes))
+```
+
+
+### ANN Model
+
+This block reads in an artificial neural network (ANN) model and uses it to make predictions on tele_norm, which are stored in a variable called ann_pred. Then it prints out the confusion matrix of the ANN model's predictions against the true labels in tele_norm.
+```{r}
+ann_model <- readRDS("ann_model.RDS")
+
+ann_pred <- predict(ann_model ,tele_norm)
+
+confusionMatrix(as.factor(ifelse(ann_pred>0.25,1,0)),as.factor(tele_norm$yyes))
+```
+
+```{r}
+plot(ann_model)
+```
+
+
+### Logit model
+
+This block reads in a logistic regression model and uses it to make predictions on tele_norm, which are stored in a variable called logit_pred. Then it prints out the confusion matrix of the logistic regression model's predictions against the true labels in tele_norm.
+
+```{r}
+logit_model<-readRDS("logit_model")
+
+logit_pred<-predict(logit_model, tele_norm , type = "response")
+
+confusionMatrix(as.factor(ifelse(logit_pred>0.36,1,0)),as.factor(tele_norm$yyes))
+```
+
+### Decision Tree
+
+This block reads in a decision tree model and uses it to make predictions on tele_norm, which are stored in a variable called DT_pred. Then it prints out the confusion matrix of the decision tree model's predictions against the true labels in tele_norm.
+
+```{r}
+DT_model <- readRDS("DT_model")
+
+DT_pred <- as.numeric(predict(DT_model, tele_norm))-1
+
+confusionMatrix(as.factor(DT_pred),as.factor(tele_norm$yyes))
+```
+
+### Boosted Decision Tree
+
+This block reads in a boosted decision tree model and uses it to make predictions on tele_norm, which are stored in a variable called DT_pred_boost. Then it prints out the confusion matrix of the boosted decision tree model's predictions against the true labels in tele_norm.
+
+```{r}
+DT_model_boost <- readRDS("DT_model_boost")
+
+DT_pred_boost <- as.numeric(predict(DT_model_boost, tele_norm))-1
+
+confusionMatrix(as.factor(DT_pred_boost),as.factor(tele_norm$yyes))
+```
+
+
+### Support Vector Machines
+
+This block reads in several support vector machine (SVM) models and uses them to make predictions on tele_norm. The predictions are stored in a data frame called SVM_df, which is then saved to a file called "svm_pred".
+ 
+```{r eval = FALSE}
+SVMs <- readRDS("svms")
+
+SVM_df <- data.frame(rbfdot = predict(SVMs$rbfdot,tele_test))
+
+SVM_df$polydot    <- predict(SVMs$polydot,tele_norm)
+SVM_df$tanhdot    <- predict(SVMs$tanhdot,tele_norm)
+SVM_df$vanilladot <- predict(SVMs$vanilladot,tele_norm)
+SVM_df$laplacedot <- predict(SVMs$laplacedot,tele_norm)
+SVM_df$besseldot  <- predict(SVMs$besseldot,tele_norm)
+SVM_df$anovadot   <- predict(SVMs$anovadot,tele_norm)
+SVM_df$splinedot  <- predict(SVMs$splinedot,tele_norm)
+
+saveRDS(SVM_df, "svm_pred")
+```
+This block reads in the svm_pred variable and checks if there is any perfect multicollinearity between the regressors and then drops polydot as it seems to have a perfect multicollinearity problem with vanilladot
+```{r}
+SVM_df<-readRDS("svm_pred")
+
+SVM_df<-as.data.frame(lapply(SVM_df,as.numeric))
+
+cor(SVM_df)
+
+SVM_df$polydot <- NULL
+```
+
+
+### Random Forest
+
+his block reads in a random forest model and uses it to make predictions on tele_norm, which are stored in a variable called RF_pred. Then it prints out the confusion matrix of the random forest model's predictions against the true labels in tele_norm.
+
+```{r}
+RF_model <- readRDS("RF_model")
+
+RF_pred <- as.numeric(predict(RF_model, tele_norm))-1
+
+confusionMatrix(as.factor(RF_pred),as.factor(tele_norm$yyes))
+```
+
+### Combined Data Frame
+
+Combining all predictions from all prior models into a single data frame for later use in the level two model
+```{r}
+df_2 <- data.frame(knn_pred,
+                   knn_reg_pred,
+                   ann_pred,
+                   logit_pred,
+                   DT_pred,
+                   DT_pred_boost,
+                   RF_pred,
+                   yyes= tele_norm$yyes)
+
+df_2 <- data.frame(df_2,SVM_df)
+```
+
+### Test and Train
+
+Spliting data into test and train data 
+```{r}
+set.seed(12345)
+test_set <- sample(1:nrow(df_2), nrow(df_2)*0.3) 
+
+df_2_train <- df_2[-test_set,]
+df_2_test  <- df_2[test_set,]
+```
+
+### UpSample Train Data
+
+Upsampling train data for use in some random forest and decision tree models
+```{r}
+df_2_up_train <- upSample(df_2_train[, !names(df_2_train) %in% "yyes"],as.factor(df_2_train$yyes), yname = "yyes")
+```
+
+### Final Decision Tree
+
+This is the final decision tree model utilizing the df_2 dataset created above to improve prediction
+```{r}
+DT_model_2 <- C5.0(as.factor(yyes) ~ ., data = df_2_train)
+
+plot(DT_model_2)
+
+DT_pred_2 <- as.factor(predict(DT_model_2, df_2_test))
+```
+
+```{r}
+confusionMatrix(DT_pred_2,as.factor(df_2_test$yyes))
+```
+
+### Cost Matrix DT
+
+Implementing a cost matrix reduce the rates of falce positives which for this case are the most important when it comes to maximizing profits for the firm running the call center
+```{r}
+error_cost <- matrix(c(0,0,-20,0),nrow = 2)
+error_cost
+
+DT_2_errorcost <- C5.0(as.factor(yyes) ~ ., data = df_2_train, costs = error_cost)
+
+errorcost_pred <- predict(DT_2_errorcost, df_2_test)
+
+confusionMatrix(as.factor(errorcost_pred), as.factor(df_2_test$yyes))
+```
+
+### Boosting
+
+Implementing 10 boosting trials to try and see if prediction error goes down
+```{r}
+DT_2_boosted <- C5.0(as.factor(yyes) ~ ., data = df_2_train, trials = 10)
+
+#plot(DT_2_boosted)
+
+boosted_pred <- predict(DT_2_boosted,df_2_test)
+
+confusionMatrix(as.factor(boosted_pred), as.factor(df_2_test$yyes))
+```
+### Combining boosting and error cost matrix 
+```{r}
+DT_2_boosted_error <- C5.0(as.factor(yyes) ~ ., data = df_2_train, trials = 20, costs = error_cost)
+
+#plot(DT_2_boosted)
+
+boosted_error_pred <- predict(DT_2_boosted_error,df_2_test)
+
+confusionMatrix(as.factor(boosted_error_pred), as.factor(df_2_test$yyes))
+```
+### Combined Logit
+
+Running a logit regression to see if prediction improves
+```{r}
+logit_comb<- step(glm(yyes~., df_2_train, family = "binomial"))
+
+logit_comb_pred<-predict(logit_comb, df_2_test , type = "response")
+
+pred<-as.factor(ifelse(logit_comb_pred>=.37,1,0))
+
+confusionMatrix(pred,as.factor(df_2_test$yyes), positive = "1")
+```
+### Combined Logit using stepwise
+```{r}
+logit_values <- seq(0.0,.99, by = 0.01)
+#creating empty vectors to save for loop output for graphing later
+logit_errors  <- c()
+logit_kappa   <- c()
+
+
+for (i in logit_values) {
+  logit_pred    <- ifelse(predict(logit_comb,df_2_test, type = 'response')>i,1,0)
+  logit_error   <- mean(logit_pred == df_2_test$yyes)
+  logit_errors  <- append(logit_errors,logit_error)
+  CM            <- confusionMatrix(as.factor(logit_pred),as.factor(df_2_test$yyes))
+  logit_kappa   <- append(logit_kappa ,CM$overall[2])
+}
+summary(logit_comb)
+```
+
+## Plotting Prediction Error Vanilla Logit
+```{r}
+plot_data <- data.frame(i = logit_values, error = logit_errors)
+ggplot(plot_data, aes(x = i, y = error)) +
+  geom_line() +
+  xlab("Logit value") +
+  ylab("Error")+  scale_x_continuous(breaks = seq(min(plot_data$i), max(plot_data$i), length.out = 10))
+```
+
+```{r}
+tuned_logit<-ifelse(predict(logit_comb,df_2_test, type = 'response')>logit_values[which.max(logit_kappa)],1,0)
+confusionMatrix(as.factor(tuned_logit), as.factor(df_2_test$yyes))
+```
+
+
+### Combined Random Forest
+
+Combined 
+```{r}
+RF_model_2 <- randomForest(as.factor(yyes)~.,data = df_2_up_train)
+
+RF_pred_2 <- as.numeric(predict(RF_model_2, df_2_test))-1
+
+confusionMatrix(as.factor(RF_pred_2), as.factor(df_2_test$yyes))
+```
+
+### Conclusion
+
+The best model was the ANN model with c(4,2) hidden layers. It managed to get a kappa of 0.4259 which is remarkable given that the best-combined model could only achieve a kappa of 0.4102. It is hard for me to fully understand why this is the case, but I suspect it has to do with how much data it was trained on. Because the first model had the availability of 50% of the data to train with, it is possible that due to the nature of ANN, which tends to continue to learn linearly as new data is implemented, it performed better than the decision tree of all the outputs of the data.
+
+From the first stage models, the order of the models regarding their kappa is ANN, RF, DT, KNN-reg, Logit, and KNN. These models all have a more complex problem estimating false negatives than false positives, which means they tend to predict that individuals will not buy when called more than they will expect that they won't buy when indeed they will. Notably, the logit model and the DT Boosted model were both the best at reducing the number of false positives, that is to say, when we believe someone will buy when they would not. The best overall balanced model was the ANN model, which showed a roughly equal amount of false positives and false negatives.
+
+Compared to the second stage models, which I believe should be worth comparison, the Combined DT preferred false negatives, while the logit preferred false positives. These results are suggestive that there is probably a possibility for a third-stage model that will still slightly better predict outcomes. Given that neither of these models outperformed the first stage ANN I would be hesitant to use either given their increased complexity and likelihood of overfitting, instead opting for increasing the amount of training data for the ANN and applying cross-validation techniques

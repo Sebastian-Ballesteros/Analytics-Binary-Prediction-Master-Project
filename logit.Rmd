@@ -1,0 +1,70 @@
+---
+title: "Tele_logit"
+author: "Ballesteros"
+date: "2023-03-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(caret)
+tele_train<-readRDS("tele_train")
+tele_test<- readRDS("tele_test")
+```
+
+```{r}
+logit_model<- glm(yyes ~ . ,data=tele_train, family = "binomial")
+summary(logit_model)
+```
+
+```{r}
+cor(tele_train)[which(cor(tele_train) == 1)]
+```
+
+
+```{r}
+logit_pred<-predict(logit_model, newdata = tele_test , type = "response")
+
+pred<-as.factor(ifelse(logit_pred>=0.15,1,0))
+test<-as.factor(tele_test$yyes)
+
+confusionMatrix(pred,test, positive = "1")
+```
+```{r eval = FALSE}
+logit_values <- seq(0.0,.99, by = 0.01)
+#creating empty vectors to save for loop output for graphing later
+logit_errors  <- c()
+logit_kappa   <- c()
+logit_model   <- glm(yyes~., tele_train, family = "binomial")
+logit_model   <- step(logit_model)
+
+
+for (i in logit_values) {
+  logit_pred    <- ifelse(predict(logit_model,tele_test, type = 'response')>i,1,0)
+  logit_error   <- mean(logit_pred == tele_test$yyes)
+  logit_errors  <- append(logit_errors,logit_error)
+  CM            <- confusionMatrix(as.factor(logit_pred),as.factor(tele_test$yyes))
+  logit_kappa   <- append(logit_kappa ,CM$overall[2])
+}
+
+saveRDS(logit_model,"logit_model")
+```
+
+```{r}
+plot_data <- data.frame(i = logit_values, error = logit_kappa)
+ggplot(plot_data, aes(x = i, y = error)) +
+  geom_line() +
+  xlab("Logit value") +
+  ylab("kappa")+  scale_x_continuous(breaks = seq(min(plot_data$i), max(plot_data$i), length.out = 10))
+```
+
+```{r}
+tuned_logit<-ifelse(predict(logit_model,tele_test, type = 'response')>logit_values[which.max(logit_kappa)],1,0)
+confusionMatrix(as.factor(tuned_logit), as.factor(tele_test$yyes))
+summary(logit_comb)
+```
+
+

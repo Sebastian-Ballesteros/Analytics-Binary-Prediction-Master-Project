@@ -1,0 +1,58 @@
+---
+title: "Tele_Ann"
+author: "Ballesteros"
+date: "2023-03-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Read Packages
+The neuralnet package is loaded, along with the caret package which is used to evaluate model performance. The training and test datasets are loaded into R using the readRDS function.
+```{r}
+library(neuralnet)
+library(caret)
+```
+
+### Loading test and train
+```{r}
+tele_train <- readRDS("tele_train")
+tele_test <- readRDS("tele_test")
+```
+
+A neural network model is then built using the neuralnet function, with the dependent variable yyes and all other variables in the dataset specified as predictors. The model is trained on the training dataset with the hidden parameter set to a vector of two integers (4 and 2), specifying the number of neurons in each of the two hidden layers of the neural network. The stepmax parameter is set to a large value (10^8) to ensure that the model trains for a long time. The lifesign parameter is set to "full" to print out progress updates during the training process.
+
+### Running ANN
+```{r eval = FALSE}
+ann_model<- neuralnet(yyes~., hidden = c(4,2), stepmax = 10^8, lifesign = "full", data = tele_train)
+```
+
+### Loading and judging performance of ANN
+
+The predict function is then used to generate predicted values for the testing dataset using the trained neural network model. These predicted values are converted to binary predictions using a threshold of 0.5.
+
+The model's performance is evaluated using a confusion matrix. The confusionMatrix function from the caret package is used to compare the predicted binary values to the true binary values, with "1" specified as the positive class.
+
+```{r}
+ann_model <- readRDS("ann_model.RDS")
+
+ann_pred <- predict(ann_model, tele_test)
+
+ann_pred_disc <- ifelse(ann_pred > 0.25, 1, 0)
+
+confusionMatrix(as.factor(ann_pred_disc), as.factor(tele_test$yyes), positive = "1")
+```
+
+```{r}
+plot(ann_model)
+```
+
+
+Finally, the trained neural network model is saved to a file called "ann_model.RDS" using the saveRDS function.
+
+```{r eval= FALSE}
+saveRDS(ann_model,"ann_model.RDS")
+```
+
